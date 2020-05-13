@@ -5,7 +5,7 @@ import pathlib
 
 from tokenizer_tools.conllz.writer import write_conllx
 
-from data_expend.processor import process_one_line, CheckFailedError
+from cls_data_expend.processor import process_one_line, CheckFailedError
 
 
 def make_dir():

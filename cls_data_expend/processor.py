@@ -10,6 +10,8 @@ import json
 from bson import json_util as bson
 
 
+from tokenizer_tools.tagset.offset.corpus import Corpus
+from tokenizer_tools.tagset.offset.document import Document
 from tokenizer_tools.tagset.offset.sequence import Sequence
 from tokenizer_tools.conllz.sentence import SentenceX
 from tokenizer_tools.tagset.converter.offset_to_biluo import offset_to_biluo
@@ -24,7 +26,9 @@ def process_one_line(line, logger=sys.stderr):
     text = obj['text']
     intent = obj['intent']
     id = obj["id"]
-    seq = Sequence(text, label=intent, id=id)
+    domain = obj["domain"]
+    seq = Document(text, label=intent, id=id)
+    seq.domain = domain
     for entity in obj['entities']:
         start = int(entity['start'])  # original index start at 0
         end = int(entity['end'])
@@ -45,7 +49,7 @@ def process_one_line(line, logger=sys.stderr):
     # print(encoding)
 
     sentence = SentenceX(word_lines=text, attribute_lines=[encoding], id=seq.id)
-    sentence.meta = {'label': intent}
+    sentence.meta = {'domain': domain, 'label': intent}
 
     return seq, sentence
 
@@ -62,6 +66,7 @@ if __name__ == "__main__":
     seq, seqence = process_one_line(test_input)
 
     print(seq)
+    print(seqence)
 
     # Sequence(text=['上', '海', '的', '明', '天', '的', '天', '气'], span_set=SpanSet(
     #          [Span(0, 2, '地点', value=['上', '海'], normal_value=None), Span(3, 5, '日期', value=['明', '天'], normal_value=None)]),
