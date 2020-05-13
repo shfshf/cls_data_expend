@@ -5,6 +5,7 @@ from setuptools import setup
 
 install_requires = [
     "tokenizer_tools",
+    "pymongo",
 ]
 
 setup(name='cls_data_expend',
