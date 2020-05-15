@@ -1,5 +1,5 @@
 {
-  "max_list_expend": 5,
+  "max_list_expend": 500,
   "data_corpus": "./data/domain/data.conllx",
   "mapping": "./data/mapping.json",
   "meta": "./data/dict/meta.json",
