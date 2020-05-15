@@ -65,7 +65,8 @@ class Data_Expend():
     @classmethod
     def hebing(cls, A, B):
         for k, v in B.items():
-            A[k] = A.get(k, 0) + v
+            if k in A:
+                A[k] += v
         return A
 
     # set entity list
